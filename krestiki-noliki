@@ -1,0 +1,51 @@
+size = 3
+okno = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+def game_visual():
+    """выводим игровое окно"""
+    print( '_' * 4 * size)
+    for i in range(size):
+        print((' ' * 3 + '|')*3)
+        print('', okno[i*3], '|', okno[1+ i*3], '|',  okno[2 + i*3], '|')
+        print(('_' * 3 + '|')*3)
+
+def zapret(index, char):
+    if (index > 9 or index < 1 or okno[index-1] in ('X', '0')):
+        return False
+    okno[index-1] =char
+    return True
+
+def check_pobeda():
+    win_yes = False 
+    win = (0,1,2), (3,4,5), (6,7,8), (1,4,7), (2,5,8), (0,3,6)
+    for i in (win):
+        if okno[i[0]] == okno[i[1]] == okno[i[2]]:
+            win_yes = okno[i[0]]
+        
+    return win_yes
+
+def game():
+    step = 1
+    '''игра начинается'''
+    igrok1 = 'X'
+    while (step<10) and (check_pobeda() == False):
+        index1 = input('ходит игрок ' + igrok1 + '. Введите число (0 - выход из игры):')
+        if index1 == '0':
+            break
+        step += 1
+        if (zapret(int(index1), igrok1)):
+            print('Удачный ход')
+            game_visual()
+        else:
+            print('Введите другое значение')
+            
+        if igrok1 == 'X':
+            igrok1 = '0'
+        else:
+            igrok1 = 'X'
+    print(check_pobeda(), '- победил!')
+
+   
+
+game_visual()
+game()
