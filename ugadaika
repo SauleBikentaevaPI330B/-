@@ -1,0 +1,35 @@
+from random import *
+def game():
+    chislo = randint(1,100)
+    def proverka_na_duraka():
+        while True:
+            znah = input('Введите значение:')
+            if znah.isdigit():
+                if 1<=int(znah)<=100:
+                    return int(znah)
+            else:
+                print('А может быть все-таки введем целое число от 1 до 100?')
+    print(f'Добро пожаловать в числовую угадайку!')
+    fishka = proverka_na_duraka()
+    popitka = 1
+    while  fishka != chislo:
+        if fishka < chislo:
+            print('Ваше число меньше загаданного, попробуйте еще разок')
+        elif fishka > chislo:
+            print('Ваше число больше загаданного, попробуйте еще разок')
+        popitka += 1
+        fishka = proverka_na_duraka()
+    print(f'Вы угадали с {popitka} попытки, поздравляем! Это число {chislo}')
+v = 'да'
+while True:
+    game()
+    v = input('Вы бы хотели сыграть еще раз в игру? (да или нет): ').strip().lower()
+    if v == 'да':
+        continue
+    elif v == 'нет':
+        break
+    else:
+        print("Неизвестный ответ. Считаем, что 'нет'.")
+        break
+
+print('Спасибо, что играли в числовую угадайку. Еще увидимся...')
